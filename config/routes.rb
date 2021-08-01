@@ -1,7 +1,9 @@
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  # GET /about
+
+  mount API::Base, at: "/"
+
   get "/about", to: "about#index"
 
   get "password", to: "passwords#edit", as: :edit_password
@@ -16,7 +18,4 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   root to: "main#index"
-  
-  
-
 end
