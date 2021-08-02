@@ -1,0 +1,8 @@
+  <% @shopping_lists = Current.user.shopping_lists %>
+  <div class="d-flex align-items-center justify-content-center">
+    <% if @shopping_lists.present? %> 
+      <%= button_to "Done Shopping?", done_path, class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+
+  

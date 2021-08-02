@@ -4,10 +4,17 @@ Rails.application.routes.draw do
 
   mount API::Base, at: "/"
 
-  get "/about", to: "about#index"
+  get "store_lookup", to: "store_lookup#new"
+  post "store_lookup", to: "store_lookup#create"
 
   get "password", to: "passwords#edit", as: :edit_password
   patch "password", to: "passwords#update"
+
+  get "item", to: "item#edit", as: :edit_item
+  patch "item", to: "item#update", as: :update_item
+  post "item", to: "item#create"
+
+  delete "delete_item", to: "item#destroy"
 
   get "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
@@ -17,5 +24,7 @@ Rails.application.routes.draw do
 
   delete "logout", to: "sessions#destroy"
 
+  get "done", to: "main#done"
+  post "/", to: "main#create", as: :create_list
   root to: "main#index"
 end

@@ -1,0 +1,60 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Add New List</button>
+  </li>
+  <% @shopping_lists = Current.user.shopping_lists %>
+  <% if @shopping_lists.present? %> 
+    <% @shopping_lists.each do |list| %>
+      <% name =  list.name.downcase %>
+      <li class = "nav-item" role="presentation"><button class="nav-link" id="<%= name %>-tab" data-bs-toggle="tab" data-bs-target="#<%= name %>" aria-controls="<%= name %>"><%= list.name %></a></li>
+    <% end %>
+<% end %>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <%= render partial: "main/new_list" %>
+  </div>
+  <% @shopping_lists.each do |list| %>
+    <% list_name =  list.name.downcase %>
+    <div class="tab-pane fade" id="<%= list_name %>" role="tabpanel" aria-labelledby="<%= list_name %>-tab">
+      <h4><%= list_name.capitalize %></h4>
+      <%= form_with model: @item, url: item_path do |form| %>
+        <div class="mb-3">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control", placeholder: "eg. Apples" %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :quantity %>
+          <%= form.text_field :quantity, class: "form-control", placeholder: "eg. 1,000" %>
+          <%= form.hidden_field :list_id, value: list[:id] %>
+          <%= form.hidden_field :is_found, value: false %>
+        </div>
+        <div class="mb-3">
+          <%= form.submit "Add Item", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">In Cart</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scop="col">Edit</th>
+            <th scop="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% list.items_in_list.each do |item| %>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td><%= button_to "Edit", edit_item_path(item), method: :get, class: "btn btn-outline-secondary" %></td>
+              <td><%= button_to "Delete", delete_item_path(item), method: :delete, class: "btn btn-outline-danger" %></td>
+            </tr>
+        </tbody>
+          <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>

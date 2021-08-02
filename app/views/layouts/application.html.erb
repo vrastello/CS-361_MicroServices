@@ -13,8 +13,10 @@
 
   <body>
     <%= render partial: "shared/navbar" %>
-    <div class="container">
+    <div class="alert">
       <%= render partial: "shared/flash" %>
+    </div>
+    <div class="container">
       <%= yield %>
     </div>
   </body>

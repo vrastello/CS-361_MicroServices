@@ -1,4 +1,10 @@
-<h1>Sign In</h1>
+<div class="d-flex align-items-center justify-content-center">
+  <h1>Shopping List App</h1>
+</div>
+  <div class="d-flex align-items-center justify-content-center">
+  <h2><i>Your friendly shopping list helper!</i></h2>
+</div>
+<h3>Sign In</h3>
 
 <%= form_with url: sign_in_path do |form| %>
   <div class="mb-3">
@@ -13,3 +19,6 @@
     <%= form.submit "Sign In", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<h4>Not already a member?</h4>
+<%= link_to "Sign Up", sign_up_path, class: "btn btn-primary", role: "button"%>

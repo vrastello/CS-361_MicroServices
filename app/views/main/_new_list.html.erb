@@ -1,0 +1,18 @@
+<h3>Create New Shopping List</h3>
+
+<%= form_with model: @shopping_list, url: create_list_path do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="alert alert-danger">
+      <% form.object.errors.full_messages.each do |message| %>
+        <div><%= message  %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", placeholder: "eg: Target" %>
+  </div>
+  <div class="mb-3">
+    <%= form.submit "Create New List", class: "btn btn-primary" %>
+  </div>
+<% end  %>

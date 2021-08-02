@@ -1,0 +1,14 @@
+<h1>Store Look Up</h1>
+<h3>(not finished: requires microservice)</h3>
+
+<%= form_with url: store_lookup_path do |form| %>
+  <div class="mb-3">
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code, class: "form-control", placeholder: "Enter zip code" %>
+  </div>
+  <div class="mb-3">
+    <%= form.submit "Look Up", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= render partial: "store_lookup/results" %>
