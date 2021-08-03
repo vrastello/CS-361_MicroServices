@@ -24,7 +24,8 @@ Rails.application.routes.draw do
 
   delete "logout", to: "sessions#destroy"
 
-  get "done", to: "main#done"
+  get "quit", to: "main#destroy"
+  get "sure", to: "main#edit"
   post "/", to: "main#create", as: :create_list
   root to: "main#index"
 end

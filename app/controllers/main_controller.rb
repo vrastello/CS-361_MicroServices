@@ -20,8 +20,11 @@ class MainController < ApplicationController
     end
   end
 
-  def done
-    
+  def edit; end
+
+  def destroy
+    ShoppingList.where(user_id: Current.user[:id]).delete_all
+    redirect_to root_path
   end
 
   private
