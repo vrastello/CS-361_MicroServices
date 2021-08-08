@@ -7,7 +7,7 @@ class ItemController < ApplicationController
   def create
     @item = Item.new(create_params)
     if @item.save
-      redirect_to root_path, notice: "Successfully added item"
+      redirect_to root_path, notice: "Item added!"
     else
       redirect_to root_path, alert: "Item not added!"
     end
@@ -24,13 +24,15 @@ class ItemController < ApplicationController
 
   def destroy
     Item.destroy(params[:format].to_i)
-    redirect_to root_path, notice: "Item Deleted"
+    flash[:warn] = "Item Deleted"
+    redirect_to root_path
   end
 
   def cart
     @item = Item.find(params[:format].to_i)
     @item.update_attribute(:is_found, true)
-    redirect_to root_path, notice: "One Down!"
+    flash[:success] = "One Down!"
+    redirect_to root_path
   end
 end
 

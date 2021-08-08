@@ -1,7 +1,7 @@
   <% @shopping_lists = Current.user.shopping_lists %>
   <div class="d-flex align-items-center justify-content-center">
     <% if @shopping_lists.present? %> 
-      <%= link_to "Done Shopping?", sure_path , class: "btn btn-outline-success" %>
+      <%= link_to "Done Shopping? Delete All lists.", sure_path , class: "btn btn-outline-success" %>
     <% end %>
   </div>
 

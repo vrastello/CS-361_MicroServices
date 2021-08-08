@@ -24,6 +24,7 @@ class MainController < ApplicationController
 
   def destroy
     ShoppingList.where(user_id: Current.user[:id]).delete_all
+    flash[:success] = "See you next time!"
     redirect_to root_path
   end
 
