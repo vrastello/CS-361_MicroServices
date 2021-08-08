@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "item", to: "item#edit", as: :edit_item
   patch "item", to: "item#update", as: :update_item
   post "item", to: "item#create"
-
+  get "cart_item", to: "item#cart"
   delete "delete_item", to: "item#destroy"
 
   get "sign_up", to: "registrations#new"

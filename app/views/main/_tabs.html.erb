@@ -1,23 +1,24 @@
+
+<% @shopping_lists = Current.user.shopping_lists %>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Add New List</button>
+    <button class="<%= @shopping_lists.any? { |l| l.active? } ? 'nav-link' : 'nav-link active' %>" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Add New List</button>
   </li>
-  <% @shopping_lists = Current.user.shopping_lists %>
   <% if @shopping_lists.present? %> 
     <% @shopping_lists.each do |list| %>
-      <% name =  list.name.downcase %>
-      <li class = "nav-item" role="presentation"><button class="nav-link" id="<%= name %>-tab" data-bs-toggle="tab" data-bs-target="#<%= name %>" aria-controls="<%= name %>"><%= list.name %></a></li>
+      <% name =  list.name.parameterize %>
+      <li class = "nav-item" role="presentation"><button class="nav-link<%= list.active? ? ' active' : ''  %>" id="<%= name %>-tab" data-bs-toggle="tab" data-bs-target="#<%= name %>" aria-controls="<%= name %>"><%= list.name.capitalize %></a></li>
     <% end %>
 <% end %>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div class="tab-pane fade<%= @shopping_lists.any? { |l| l.active? } ? '' : ' active show' %>" id="home" role="tabpanel" aria-labelledby="home-tab">
     <%= render partial: "main/new_list" %>
   </div>
   <% @shopping_lists.each do |list| %>
-    <% list_name =  list.name.downcase %>
-    <div class="tab-pane fade" id="<%= list_name %>" role="tabpanel" aria-labelledby="<%= list_name %>-tab">
-      <h4><%= list_name.capitalize %></h4>
+    <% list_name =  list.name.parameterize %>
+    <div class="tab-pane fade<%= list.active? ? ' active show' : ''  %>" id="<%= list_name %>" role="tabpanel" aria-labelledby="<%= list_name %>-tab">
+      <h4><%= list.name.capitalize %></h4>
       <%= form_with model: @item, url: item_path do |form| %>
         <div class="mb-3">
           <%= form.label :name %>
@@ -25,7 +26,7 @@
         </div>
         <div class="mb-3">
           <%= form.label :quantity %>
-          <%= form.text_field :quantity, class: "form-control", placeholder: "eg. 1,000" %>
+          <%= form.text_field :quantity, class: "form-control", placeholder: "eg. 1 lb" %>
           <%= form.hidden_field :list_id, value: list[:id] %>
           <%= form.hidden_field :is_found, value: false %>
         </div>
@@ -45,8 +46,8 @@
         </thead>
         <tbody>
           <% list.items_in_list.each do |item| %>
-            <tr>
-              <td><input type="checkbox"></td>
+            <tr style="<%= item.in_cart? ? 'opacity: 0.3' : ''  %>">
+              <td><%= button_to "Got it!", cart_item_path(item), method: :get, class: "btn btn-outline-secondary" %></td>
               <td><%= item.name %></td>
               <td><%= item.quantity %></td>
               <td><%= button_to "Edit", edit_item_path(item), method: :get, class: "btn btn-outline-secondary" %></td>
