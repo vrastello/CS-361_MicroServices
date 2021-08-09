@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  open: false
+  rating: 1
+  ratings_total: 1
+  address: MyString
+
+two:
+  name: MyString
+  open: false
+  rating: 1
+  ratings_total: 1
+  address: MyString
