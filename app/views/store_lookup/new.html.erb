@@ -1,6 +1,6 @@
 <h1>Store Look Up</h1>
 
-<%= form_with url: store_lookup_path do |form| %>
+<%= form_with model: @api_responder, url: store_lookup_path do |form| %>
   <div class="mb-3">
     <%= form.label :zip_code %>
     <%= form.text_field :zip_code, class: "form-control", placeholder: "Enter zip code" %>

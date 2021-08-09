@@ -1,8 +1,23 @@
-<h3>Results</h3>
-<div class="border border-primary" style="max_height: 75%; max_width: 75%; background-color: rgba(0,0,255,.1)">
+<% user = Current.user %>
+<% @api_responders = user.api_responders %>
+<h2>Results</h2>
+<div class="border border-primary" style="d-inline-flex p-2; background-color: rgba(0,0,255,.1)">
   <ul>
-    <li>Store 1</li>
-    <li>Store 2</li>
-    <li>Store 3</li>
+    <% if @api_responders.present? %>
+      <h3>Zip code: <%= user.api_responders.last.zip_code %></h3>
+      <% @stores = user.api_responders.last.stores %>
+      <% @stores.each do |store| %>
+        <li><h5><%= store.name %></h5>
+          <ul>
+            <li><%= store.open? %></li>
+            <li>Rating: <%= store.rating %></li>
+            <ul>
+              <li><%= store.user_ratings_total %> reviews</li>
+            </ul>
+            <li>Address: <%= store.vicinity %></li>
+          </ul>
+        </li>
+      <% end %>
+    <% end %>
   </ul>
 </div>

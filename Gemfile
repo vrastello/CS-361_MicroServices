@@ -27,6 +27,14 @@ gem 'grape'
 gem 'wikipedia-client'
 # rack-cors
 gem 'rack-cors'
+# http gem
+gem 'http'
+#sprockets
+gem 'sprockets', '~> 4.0'
+#simple-form
+gem 'simple_form'
+#auto-complete
+gem 'simple_form_autocomplete'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

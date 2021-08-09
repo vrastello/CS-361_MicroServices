@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_232541) do
+ActiveRecord::Schema.define(version: 2021_08_09_011308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_responders", force: :cascade do |t|
+    t.string "zip_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.integer "list_id"
@@ -36,6 +43,17 @@ ActiveRecord::Schema.define(version: 2021_08_07_232541) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.boolean "open_now"
+    t.integer "rating"
+    t.integer "user_ratings_total"
+    t.string "vicinity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "api_responder_id"
   end
 
   create_table "users", force: :cascade do |t|
