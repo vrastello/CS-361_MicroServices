@@ -19,10 +19,10 @@
     <% list_name =  list.name.parameterize %>
     <div class="tab-pane fade<%= list.active? ? ' active show' : ''  %>" id="<%= list_name %>" role="tabpanel" aria-labelledby="<%= list_name %>-tab">
       <h4><%= list.name.capitalize %></h4>
-      <%= simple_form_for @item, url: item_path do |form| %>
+      <%= form_for @item, url: item_path do |form| %>
         <div class="mb-3">
           <%= form.label :name %>
-          <%= form.text_field :name, as: :autocomplete, source: ["test", "test2"], class: "form-control", placeholder: "eg. Apples" %>
+          <%= form.text_field :name, class: "form-control", placeholder: "eg. Apples" %>
         </div>
         <div class="mb-3">
           <%= form.label :quantity %>

@@ -9,9 +9,9 @@
       <% @stores.each do |store| %>
         <li><h5><%= store.name %></h5>
           <ul>
-            <li><%= store.open? %></li>
-            <li>Rating: <%= store.rating %>, <%= store.user_ratings_total %> ratings</li>
-            <li>Address: <%= store.vicinity %></li>
+            <li><b><%= store.open? %></b></li>
+            <li><b>Rating:</b> <%= store.rating %>, <%= store.user_ratings_total %> ratings</li>
+            <li><b>Address:</b> <%= store.vicinity %></li>
           </ul>
         </li>
       <% end %>
