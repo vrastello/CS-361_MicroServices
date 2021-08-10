@@ -10,10 +10,7 @@
         <li><h5><%= store.name %></h5>
           <ul>
             <li><%= store.open? %></li>
-            <li>Rating: <%= store.rating %></li>
-            <ul>
-              <li><%= store.user_ratings_total %> reviews</li>
-            </ul>
+            <li>Rating: <%= store.rating %>, <%= store.user_ratings_total %> ratings</li>
             <li>Address: <%= store.vicinity %></li>
           </ul>
         </li>
