@@ -10,13 +10,21 @@ class APIResponder < ApplicationRecord
     response_hash = {}
     parsed_response = JSON.parse(response)
     vars = %w[name opening_hours rating user_ratings_total vicinity]
-    5.times do |index|
+    parsed_response.length.times do |index|
       response_hash["Store#{index}"] = {}
       vars.each do |x|
-        if x == "opening_hours"
-          response_hash["Store#{index}"]["open_now"] = parsed_response[index][x]["open_now"]
+        if parsed_response[index][x].nil?
+          if x == "opening_hours"
+            response_hash["Store#{index}"]["open_now"] = "No Results"
+          else
+            response_hash["Store#{index}"][x] = "No Results" 
+          end
         else
-          response_hash["Store#{index}"][x] = parsed_response[index][x] 
+          if x == "opening_hours"
+            response_hash["Store#{index}"]["open_now"] = parsed_response[index][x]["open_now"]
+          else
+            response_hash["Store#{index}"][x] = parsed_response[index][x] 
+          end
         end
       end
     end
@@ -26,7 +34,7 @@ class APIResponder < ApplicationRecord
   def save_stores
     response_hash = nearby_places
     params = response_hash
-    5.times do |i|
+    response_hash.length.times do |i|
       merged_param = params["Store#{i}"].merge("api_responder_id" => id)
       Store.create(merged_param)
     end
